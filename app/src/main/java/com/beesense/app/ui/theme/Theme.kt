@@ -20,6 +20,7 @@ private val LightColorScheme = lightColorScheme(
 fun BeeAppTheme(content: @Composable () -> Unit) {
     MaterialTheme(
         colorScheme = LightColorScheme,
+        typography = BeeTypography,
         content = content
     )
 }
