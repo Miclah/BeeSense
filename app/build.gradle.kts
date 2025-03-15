@@ -49,6 +49,10 @@ dependencies {
     implementation(libs.material)
     implementation(libs.androidx.foundation.android)
 
+    implementation(libs.androidx.room.runtime)
+    implementation(libs.androidx.room.compiler)
+    implementation(libs.androidx.room.ktx)
+
     implementation(libs.androidx.ui)
     implementation (libs.androidx.material3.vversion)
     implementation(libs.androidx.ui.tooling.preview)
