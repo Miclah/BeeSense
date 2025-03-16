@@ -39,11 +39,14 @@ fun HiveDetailDialog(hiveData: HiveData, onDismiss: () -> Unit) {
 
                 Text(
                     text = "Hmotnosť: ${hiveData.totalWeight} kg" +
-                            (hiveData.weightLeft?.let { " (L: $it" } ?: "") +
-                            (hiveData.weightRight?.let { " / P: $it)" } ?: if (hiveData.weightLeft != null) ")" else ""),
+                            when {
+                                hiveData.weightLeft != null && hiveData.weightRight != null -> " (L: ${hiveData.weightLeft} / P: ${hiveData.weightRight})"
+                                hiveData.weightLeft != null -> " (L: ${hiveData.weightLeft} kg)"
+                                hiveData.weightRight != null -> " (P: ${hiveData.weightRight} kg)"
+                                else -> ""
+                            },
                     style = MaterialTheme.typography.bodyMedium
                 )
-
                 Spacer(modifier = Modifier.height(4.dp))
 
                 Text(text = "Teplota: ${hiveData.temperatureSensor} °C", style = MaterialTheme.typography.bodyMedium)

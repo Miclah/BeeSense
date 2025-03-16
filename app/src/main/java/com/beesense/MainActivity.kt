@@ -15,6 +15,7 @@ import com.beesense.ui.components.BottomNavigationBar
 import com.beesense.ui.navigation.Screen
 import com.beesense.ui.screens.OverviewScreen
 import com.beesense.ui.screens.GraphScreen
+import com.beesense.ui.screens.Menu
 import com.beesense.ui.theme.BeeSenseTheme
 
 class MainActivity : ComponentActivity() {
@@ -31,7 +32,7 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun MainApp() {
     val navController = rememberNavController()
-    val items = listOf(Screen.Overview, Screen.Graphs)
+    val items = listOf(Screen.Overview, Screen.Graphs, Screen.Menu)
     Scaffold(
         bottomBar = {
             val navBackStackEntry = navController.currentBackStackEntryAsState()
@@ -59,6 +60,7 @@ fun MainApp() {
         ) {
             composable(Screen.Overview.route) { OverviewScreen() }
             composable(Screen.Graphs.route) { GraphScreen() }
+            composable(Screen.Menu.route) { Menu() }
         }
     }
 }
