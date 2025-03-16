@@ -13,6 +13,7 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.beesense.ui.components.BottomNavigationBar
 import com.beesense.ui.navigation.Screen
+import com.beesense.ui.screens.OverviewScreen
 import com.beesense.ui.screens.GraphScreen
 import com.beesense.ui.theme.BeeSenseTheme
 
@@ -56,6 +57,7 @@ fun MainApp() {
             startDestination = Screen.Overview.route,
             modifier = Modifier.padding(innerPadding)
         ) {
+            composable(Screen.Overview.route) { OverviewScreen() }
             composable(Screen.Graphs.route) { GraphScreen() }
         }
     }
