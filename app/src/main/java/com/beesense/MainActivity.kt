@@ -15,7 +15,7 @@ import com.beesense.ui.components.BottomNavigationBar
 import com.beesense.ui.navigation.Screen
 import com.beesense.ui.screens.OverviewScreen
 import com.beesense.ui.screens.GraphScreen
-import com.beesense.ui.screens.Menu
+import com.beesense.ui.screens.MenuScreen
 import com.beesense.ui.theme.BeeSenseTheme
 
 class MainActivity : ComponentActivity() {
@@ -60,7 +60,7 @@ fun MainApp() {
         ) {
             composable(Screen.Overview.route) { OverviewScreen() }
             composable(Screen.Graphs.route) { GraphScreen() }
-            composable(Screen.Menu.route) { Menu() }
+            composable(Screen.Menu.route) { MenuScreen(navController) }
         }
     }
 }
