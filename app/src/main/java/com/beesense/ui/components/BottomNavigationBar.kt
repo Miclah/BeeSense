@@ -26,10 +26,12 @@ fun BottomNavigationBar(
                 selected = currentRoute == screen.route,
                 onClick = { onItemSelected(screen) },
                 icon = {
-                    Icon(
-                        painter = painterResource(id = screen.icon),
-                        contentDescription = screen.label
-                    )
+                    screen.icon?.let {
+                        Icon(
+                            painter = painterResource(id = it),
+                            contentDescription = screen.label
+                        )
+                    }
                 },
                 label = { Text(screen.label) },
                 colors = NavigationBarItemDefaults.colors(
@@ -42,3 +44,4 @@ fun BottomNavigationBar(
         }
     }
 }
+

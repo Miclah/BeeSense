@@ -16,6 +16,10 @@ import com.beesense.ui.navigation.Screen
 import com.beesense.ui.screens.OverviewScreen
 import com.beesense.ui.screens.GraphScreen
 import com.beesense.ui.screens.MenuScreen
+import com.beesense.ui.screens.subscreens.DiaryScreen
+import com.beesense.ui.screens.subscreens.HiveManagementScreen
+import com.beesense.ui.screens.subscreens.SQLManagementScreen
+import com.beesense.ui.screens.subscreens.SettingsScreen
 import com.beesense.ui.theme.BeeSenseTheme
 
 class MainActivity : ComponentActivity() {
@@ -33,6 +37,7 @@ class MainActivity : ComponentActivity() {
 fun MainApp() {
     val navController = rememberNavController()
     val items = listOf(Screen.Overview, Screen.Graphs, Screen.Menu)
+
     Scaffold(
         bottomBar = {
             val navBackStackEntry = navController.currentBackStackEntryAsState()
@@ -61,6 +66,11 @@ fun MainApp() {
             composable(Screen.Overview.route) { OverviewScreen() }
             composable(Screen.Graphs.route) { GraphScreen() }
             composable(Screen.Menu.route) { MenuScreen(navController) }
+
+            composable(Screen.HiveManagement.route) { HiveManagementScreen() }
+            composable(Screen.Diary.route) { DiaryScreen() }
+            composable(Screen.SQLManagement.route) { SQLManagementScreen() }
+            composable(Screen.Settings.route) { SettingsScreen() }
         }
     }
 }

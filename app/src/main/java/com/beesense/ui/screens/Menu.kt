@@ -21,6 +21,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import com.beesense.ui.navigation.Screen
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -28,7 +29,7 @@ fun MenuScreen(navController: NavController) {
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text("Menu", fontSize = 20.sp) }
+                title = { Text("Menu", fontSize = 22.sp) }
             )
         }
     ) { paddingValues ->
@@ -37,14 +38,13 @@ fun MenuScreen(navController: NavController) {
                 .fillMaxSize()
                 .padding(paddingValues)
                 .padding(16.dp),
-            verticalArrangement = Arrangement.spacedBy(12.dp),
+            verticalArrangement = Arrangement.spacedBy(16.dp),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            MenuItem("Pridať/Editovať úle") { navController.navigate("add_edit_hive") }
-            MenuItem("Denník") { navController.navigate("diary") }
-            MenuItem("Zobrazenie SQL dát") { navController.navigate("view_sql") }
-            MenuItem("Editovanie SQL dát") { navController.navigate("edit_sql") }
-            MenuItem("Nastavenia") { navController.navigate("settings") }
+            MenuItem("📦 Pridať/Editovať úle") { navController.navigate(Screen.HiveManagement.route) }
+            MenuItem("📔 Denník") { navController.navigate(Screen.Diary.route) }
+            MenuItem("📊 Zobrazenie/Editovanie SQL dát") { navController.navigate(Screen.SQLManagement.route) }
+            MenuItem("⚙️ Nastavenia") { navController.navigate(Screen.Settings.route) }
         }
     }
 }
@@ -56,17 +56,21 @@ fun MenuItem(label: String, onClick: () -> Unit) {
             .fillMaxWidth()
             .clickable { onClick() }
             .padding(horizontal = 8.dp),
-        shape = RoundedCornerShape(12.dp),
-        elevation = CardDefaults.cardElevation(4.dp),
-        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant)
+        shape = RoundedCornerShape(16.dp),
+        elevation = CardDefaults.cardElevation(6.dp),
+        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.primaryContainer)
     ) {
         Box(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(16.dp),
+                .padding(20.dp),
             contentAlignment = Alignment.Center
         ) {
-            Text(text = label, fontSize = 18.sp)
+            Text(
+                text = label,
+                fontSize = 18.sp,
+                color = MaterialTheme.colorScheme.onPrimaryContainer
+            )
         }
     }
 }
