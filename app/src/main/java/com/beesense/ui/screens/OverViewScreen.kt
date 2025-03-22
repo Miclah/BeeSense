@@ -46,7 +46,7 @@ fun OverviewScreen(viewModel: HiveViewModel = viewModel()) {
                             textStyle = androidx.compose.ui.text.TextStyle(fontSize = 16.sp),
                             keyboardOptions = KeyboardOptions.Default.copy(keyboardType = KeyboardType.Number),
                             modifier = Modifier
-                                .width(140.dp)
+                                .width(180.dp)
                                 .height(40.dp)
                                 .align(Alignment.CenterVertically)
                         )
