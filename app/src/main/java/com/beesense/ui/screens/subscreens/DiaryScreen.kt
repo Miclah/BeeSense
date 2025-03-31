@@ -29,9 +29,7 @@ import com.beesense.ui.components.DiaryEntryDialog
 fun DiaryScreen() {
     var diaryEntries by remember { mutableStateOf(
         listOf(
-            DiaryEntry(1, "03-11-2025 21:30", "Krmenie", "Random Random"),
-            DiaryEntry(2, "04-11-2025 08:15", "Prehliadka", "Random Random Random Random Random Random"),
-            DiaryEntry(3, "04-11-2025 12:00", "Liečenie", "Random Random Random Random")
+            DiaryEntry(1, "Krmenie", "03-11-2025 21:30", "Random Random")
         )
     ) }
 
@@ -47,7 +45,7 @@ fun DiaryScreen() {
         floatingActionButton = {
             FloatingActionButton(
                 onClick = {
-                    editingEntry = null // nový záznam
+                    editingEntry = null
                     showDialog = true
                 }
             ) {
