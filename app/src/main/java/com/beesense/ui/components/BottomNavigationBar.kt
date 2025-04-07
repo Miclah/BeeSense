@@ -24,7 +24,18 @@ fun BottomNavigationBar(
         items.forEach { screen ->
             NavigationBarItem(
                 selected = currentRoute == screen.route,
-                onClick = { onItemSelected(screen) },
+                onClick = {
+                    if (screen.route == Screen.Menu.route) {
+                        if (currentRoute != Screen.Menu.route) {
+                            navController.navigate(Screen.Menu.route) {
+                                popUpTo(Screen.Menu.route) { inclusive = true }
+                                launchSingleTop = true
+                            }
+                        }
+                    } else {
+                        onItemSelected(screen)
+                    }
+                },
                 icon = {
                     screen.icon?.let {
                         Icon(

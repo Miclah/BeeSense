@@ -32,7 +32,6 @@ fun DiaryEntryDialog(
     onSave: (DiaryEntry) -> Unit
 ) {
 
-
     val types = listOf("Kŕmenie", "Liečenie", "Bratie medu", "Prehliadka", "Iné")
     var selectedType by remember { mutableStateOf(initialEntry?.type ?: types.first()) }
 

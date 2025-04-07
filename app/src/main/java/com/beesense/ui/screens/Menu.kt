@@ -41,10 +41,30 @@ fun MenuScreen(navController: NavController) {
             verticalArrangement = Arrangement.spacedBy(16.dp),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            MenuItem("📦 Pridať/Editovať úle") { navController.navigate(Screen.HiveManagement.route) }
-            MenuItem("📔 Denník") { navController.navigate(Screen.Diary.route) }
-            MenuItem("📊 Zobrazenie/Editovanie SQL dát") { navController.navigate(Screen.SQLManagement.route) }
-            MenuItem("⚙️ Nastavenia") { navController.navigate(Screen.Settings.route) }
+            MenuItem("📦 Pridať/Editovať úle") {
+                navController.navigate(Screen.HiveManagement.route) {
+                    popUpTo(Screen.Menu.route) { inclusive = false }
+                    launchSingleTop = true
+                }
+            }
+            MenuItem("📔 Denník") {
+                navController.navigate(Screen.Diary.route) {
+                    popUpTo(Screen.Menu.route) { inclusive = false }
+                    launchSingleTop = true
+                }
+            }
+            MenuItem("📊 Zobrazenie/Editovanie SQL dát") {
+                navController.navigate(Screen.SQLManagement.route) {
+                    popUpTo(Screen.Menu.route) { inclusive = false }
+                    launchSingleTop = true
+                }
+            }
+            MenuItem("⚙️ Nastavenia") {
+                navController.navigate(Screen.Settings.route) {
+                    popUpTo(Screen.Menu.route) { inclusive = false }
+                    launchSingleTop = true
+                }
+            }
         }
     }
 }

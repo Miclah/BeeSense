@@ -29,7 +29,9 @@ import com.beesense.ui.components.DiaryEntryDialog
 fun DiaryScreen() {
     var diaryEntries by remember { mutableStateOf(
         listOf(
-            DiaryEntry(1, "Krmenie", "03-11-2025 21:30", "Random Random")
+            DiaryEntry(1, "Kremenie", "03-11-2025 21:30", "Random Random"),
+            DiaryEntry(2, "Liečenie", "04-11-2025 08:15", "Random Random Random Random Random Random"),
+            DiaryEntry(3, "Prehliadka", "04-11-2025 12:00", "Random Random Random Random")
         )
     ) }
 
