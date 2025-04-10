@@ -8,6 +8,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.sp
 
 @Composable
 fun HiveCheckboxItem(
@@ -20,7 +21,7 @@ fun HiveCheckboxItem(
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.SpaceBetween
     ) {
-        Text(text = label)
+        Text(text = label, fontSize = 20.sp)
         Checkbox(
             checked = checked,
             onCheckedChange = onCheckedChange
