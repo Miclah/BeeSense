@@ -17,6 +17,7 @@ import com.beesense.ui.screens.OverviewScreen
 import com.beesense.ui.screens.GraphScreen
 import com.beesense.ui.screens.MenuScreen
 import com.beesense.ui.screens.subscreens.DiaryScreen
+import com.beesense.ui.screens.subscreens.HiveEditorScreen
 import com.beesense.ui.screens.subscreens.HiveManagementScreen
 import com.beesense.ui.screens.subscreens.SQLManagementScreen
 import com.beesense.ui.screens.subscreens.SettingsScreen
@@ -67,10 +68,11 @@ fun MainApp() {
             composable(Screen.Graphs.route) { GraphScreen() }
             composable(Screen.Menu.route) { MenuScreen(navController) }
 
-            composable(Screen.HiveManagement.route) { HiveManagementScreen() }
+            composable(Screen.HiveManagement.route) { HiveManagementScreen(navController) }
             composable(Screen.Diary.route) { DiaryScreen() }
             composable(Screen.SQLManagement.route) { SQLManagementScreen() }
             composable(Screen.Settings.route) { SettingsScreen() }
+            composable(Screen.HiveEditor.route) { HiveEditorScreen() }
         }
     }
 }
