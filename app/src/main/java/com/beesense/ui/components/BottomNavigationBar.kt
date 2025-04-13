@@ -16,26 +16,32 @@ fun BottomNavigationBar(
     navController: NavController,
     items: List<Screen>,
     currentRoute: String,
+    isSubScreen: Boolean,
     onItemSelected: (Screen) -> Unit
 ) {
     NavigationBar(
         containerColor = MaterialTheme.colorScheme.primary
     ) {
         items.forEach { screen ->
+            val isEnabled = !isSubScreen || screen == Screen.Menu
+
             NavigationBarItem(
                 selected = currentRoute == screen.route,
                 onClick = {
+                    if (!isEnabled) return@NavigationBarItem
+
                     if (screen.route == Screen.Menu.route) {
-                        if (currentRoute != Screen.Menu.route) {
-                            navController.navigate(Screen.Menu.route) {
-                                popUpTo(Screen.Menu.route) { inclusive = true }
-                                launchSingleTop = true
+                        navController.navigate(Screen.Menu.route) {
+                            popUpTo(Screen.Menu.route) {
+                                inclusive = true
                             }
+                            launchSingleTop = true
                         }
                     } else {
                         onItemSelected(screen)
                     }
                 },
+                enabled = isEnabled,
                 icon = {
                     screen.icon?.let {
                         Icon(
@@ -47,12 +53,15 @@ fun BottomNavigationBar(
                 label = { Text(screen.label) },
                 colors = NavigationBarItemDefaults.colors(
                     selectedIconColor = MaterialTheme.colorScheme.onPrimary,
-                    unselectedIconColor = MaterialTheme.colorScheme.onPrimary.copy(alpha = 0.6f),
+                    unselectedIconColor = MaterialTheme.colorScheme.onPrimary.copy(
+                        alpha = if (isEnabled) 0.6f else 0.3f
+                    ),
                     selectedTextColor = MaterialTheme.colorScheme.onPrimary,
-                    unselectedTextColor = MaterialTheme.colorScheme.onPrimary.copy(alpha = 0.6f)
+                    unselectedTextColor = MaterialTheme.colorScheme.onPrimary.copy(
+                        alpha = if (isEnabled) 0.6f else 0.3f
+                    )
                 )
             )
         }
     }
 }
-

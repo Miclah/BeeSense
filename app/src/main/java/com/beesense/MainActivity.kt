@@ -43,17 +43,20 @@ fun MainApp() {
         bottomBar = {
             val navBackStackEntry = navController.currentBackStackEntryAsState()
             val currentRoute = navBackStackEntry.value?.destination?.route ?: Screen.Overview.route
+            val isSubScreen = currentRoute !in listOf(
+                Screen.Overview.route,
+                Screen.Graphs.route,
+                Screen.Menu.route
+            )
+
             BottomNavigationBar(
                 navController = navController,
                 items = items,
                 currentRoute = currentRoute,
+                isSubScreen = isSubScreen,
                 onItemSelected = { screen ->
                     navController.navigate(screen.route) {
-                        popUpTo(navController.graph.startDestinationRoute!!) {
-                            saveState = true
-                        }
                         launchSingleTop = true
-                        restoreState = true
                     }
                 }
             )
@@ -67,7 +70,6 @@ fun MainApp() {
             composable(Screen.Overview.route) { OverviewScreen() }
             composable(Screen.Graphs.route) { GraphScreen() }
             composable(Screen.Menu.route) { MenuScreen(navController) }
-
             composable(Screen.HiveManagement.route) { HiveManagementScreen(navController) }
             composable(Screen.Diary.route) { DiaryScreen() }
             composable(Screen.SQLManagement.route) { SQLManagementScreen() }
@@ -76,4 +78,3 @@ fun MainApp() {
         }
     }
 }
-
