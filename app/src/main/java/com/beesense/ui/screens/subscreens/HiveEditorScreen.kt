@@ -139,7 +139,7 @@ fun HiveEditorScreen(
 
             HiveCheckboxItem(
                 label = "Zobraziť v aplikácii",
-                checked = airPressure,
+                checked = showInApp,
                 onCheckedChange = { showInApp = it }
             )
 
