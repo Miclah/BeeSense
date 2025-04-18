@@ -5,14 +5,10 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.Button
-import androidx.compose.material3.Divider
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Switch
-import androidx.compose.material3.SwitchDefaults
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
@@ -32,6 +28,9 @@ fun SettingsScreen() {
     var isDarkMode by remember { mutableStateOf(false) }
     var areNotificationsEnabled by remember { mutableStateOf(false) }
 
+    var weightThreshold by remember { mutableStateOf("3") }
+    var inactivityThresholdHours by remember { mutableStateOf("5") }
+
     BeeSenseTheme(darkTheme = isDarkMode) {
         Column(modifier = Modifier.padding(16.dp)) {
             TopAppBar(
@@ -49,21 +48,15 @@ fun SettingsScreen() {
                 horizontalArrangement = Arrangement.SpaceBetween,
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                Text(
-                    text = "Svetlý/Tmavý režim",
-                    style = MaterialTheme.typography.bodyLarge.copy(fontSize = 18.sp)
-                )
+                Text("Svetlý/Tmavý režim", style = MaterialTheme.typography.bodyLarge.copy(fontSize = 18.sp))
                 Switch(
                     checked = isDarkMode,
-                    onCheckedChange = {
-                        isDarkMode = it
-                    },
+                    onCheckedChange = { isDarkMode = it },
                     modifier = Modifier.padding(vertical = 8.dp)
                 )
             }
 
             HorizontalDivider(modifier = Modifier.padding(vertical = 16.dp))
-
 
             Text(
                 text = "Nastavenia notifikácií",
@@ -76,10 +69,7 @@ fun SettingsScreen() {
                 horizontalArrangement = Arrangement.SpaceBetween,
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                Text(
-                    text = "Povoliť notifikácie",
-                    style = MaterialTheme.typography.bodyLarge.copy(fontSize = 18.sp)
-                )
+                Text("Povoliť notifikácie", style = MaterialTheme.typography.bodyLarge.copy(fontSize = 18.sp))
                 Switch(
                     checked = areNotificationsEnabled,
                     onCheckedChange = { areNotificationsEnabled = it },
@@ -87,7 +77,33 @@ fun SettingsScreen() {
                 )
             }
 
-            HorizontalDivider(modifier = Modifier.padding(vertical = 16.dp))
+            Text(
+                text = "Limit zmeny hmotnosti (kg)",
+                style = MaterialTheme.typography.bodyLarge.copy(fontSize = 16.sp),
+                modifier = Modifier.padding(top = 16.dp, bottom = 4.dp)
+            )
+            androidx.compose.material3.OutlinedTextField(
+                value = weightThreshold,
+                onValueChange = { weightThreshold = it.filter { ch -> ch.isDigit() || ch == '.' } },
+                modifier = Modifier.fillMaxWidth(),
+                placeholder = { Text("Napr. 3.0") },
+                singleLine = true
+            )
+
+
+            Text(
+                text = "Interval opakovania notifikácie (hodiny)",
+                style = MaterialTheme.typography.bodyLarge.copy(fontSize = 16.sp),
+                modifier = Modifier.padding(top = 16.dp, bottom = 4.dp)
+            )
+            androidx.compose.material3.OutlinedTextField(
+                value = inactivityThresholdHours,
+                onValueChange = { inactivityThresholdHours = it.filter { ch -> ch.isDigit() } },
+                modifier = Modifier.fillMaxWidth(),
+                placeholder = { Text("Napr. 5") },
+                singleLine = true
+            )
+
         }
     }
 }
