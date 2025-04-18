@@ -54,8 +54,10 @@ dependencies {
 
 
     implementation(libs.androidx.core.ktx)
+    implementation("org.jetbrains:annotations:23.0.0")
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
+    implementation(libs.androidx.room.common.jvm)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
