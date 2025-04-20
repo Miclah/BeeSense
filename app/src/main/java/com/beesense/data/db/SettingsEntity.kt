@@ -7,5 +7,7 @@ import androidx.room.PrimaryKey
 data class SettingsEntity(
     @PrimaryKey val id: Int = 1,
     val isDarkMode: Boolean,
-    val areNotificationsEnabled: Boolean
+    val areNotificationsEnabled: Boolean,
+    val weightThresholdKg: Float,
+    val inactivityThresholdHours: Int
 )
