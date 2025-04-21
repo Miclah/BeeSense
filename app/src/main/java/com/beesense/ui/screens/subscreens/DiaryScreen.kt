@@ -81,6 +81,10 @@ fun DiaryScreen() {
         DiaryEntryDialog(
             initialEntry = editingEntry,
             onDismiss = { showDialog = false },
+            onDelete = { entryToDelete ->
+                diaryEntries = diaryEntries.filterNot { it.id == entryToDelete.id }
+                showDialog = false
+            },
             onSave = { newEntry ->
                 diaryEntries = if (newEntry.id == 0) {
                     val newId = (diaryEntries.maxOfOrNull { it.id } ?: 0) + 1
@@ -90,6 +94,7 @@ fun DiaryScreen() {
                 }
                 showDialog = false
             }
+
         )
     }
 }
