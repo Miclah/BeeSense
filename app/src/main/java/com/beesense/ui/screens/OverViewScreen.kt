@@ -22,35 +22,31 @@ import com.beesense.viewmodel.HiveViewModel
 fun OverviewScreen(viewModel: HiveViewModel = viewModel()) {
     val hiveDataState = viewModel.hiveData.collectAsState()
     var searchQuery by remember { mutableStateOf("") }
+    var isSearchActive by remember { mutableStateOf(false) }
     var favoriteHives by rememberSaveable { mutableStateOf(setOf<Int>()) }
 
     Scaffold(
         topBar = {
             TopAppBar(
                 title = {
-                    Row(
-                        modifier = Modifier.fillMaxWidth(),
-                        verticalAlignment = Alignment.CenterVertically
-                    ) {
-                        Text(
-                            text = "Prehľad úľov",
-                            fontSize = 20.sp,
-                            modifier = Modifier.weight(1f)
-                        )
-                        Spacer(modifier = Modifier.width(8.dp))
-                        OutlinedTextField(
-                            value = searchQuery,
-                            onValueChange = { searchQuery = it },
-                            label = { Text("ID úľa", fontSize = 14.sp) },
-                            singleLine = true,
-                            textStyle = androidx.compose.ui.text.TextStyle(fontSize = 16.sp),
-                            keyboardOptions = KeyboardOptions.Default.copy(keyboardType = KeyboardType.Number),
-                            modifier = Modifier
-                                .width(180.dp)
-                                .height(40.dp)
-                                .align(Alignment.CenterVertically)
-                        )
-                    }
+                    Text("Prehlad", fontSize = 26.sp)
+                },
+                actions = {
+                    SearchBar(
+                        inputField = {
+                            TextField(
+                                value = searchQuery,
+                                onValueChange = { searchQuery = it },
+                                placeholder = { Text("Hladat ID ula...") },
+                                singleLine = true,
+                                keyboardOptions = KeyboardOptions.Default.copy(keyboardType = KeyboardType.Number),
+                                textStyle = androidx.compose.ui.text.TextStyle(fontSize = 16.sp)
+                            )
+                        },
+                        expanded = isSearchActive,
+                        onExpandedChange = { isSearchActive = it },
+                        modifier = Modifier.padding(end = 8.dp),
+                    ) {}
                 }
             )
         }
@@ -61,7 +57,9 @@ fun OverviewScreen(viewModel: HiveViewModel = viewModel()) {
 
         LazyVerticalGrid(
             columns = GridCells.Adaptive(minSize = 180.dp),
-            modifier = Modifier.padding(padding)
+            modifier = Modifier
+                .padding(padding)
+                .padding(horizontal = 8.dp, vertical = 12.dp)
         ) {
             items(filteredHives) { hiveData ->
                 HiveCard(

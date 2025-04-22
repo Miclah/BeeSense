@@ -9,8 +9,11 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FloatingActionButton
+import androidx.compose.material3.Icon
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.SearchBar
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextField
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -27,21 +30,50 @@ import com.beesense.ui.components.DiaryEntryDialog
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun DiaryScreen() {
-    var diaryEntries by remember { mutableStateOf(
-        listOf(
-            DiaryEntry(1, "Kremenie", "03-11-2025 21:30", "Random Random"),
-            DiaryEntry(2, "Liečenie", "04-11-2025 08:15", "Random Random Random Random Random Random"),
-            DiaryEntry(3, "Prehliadka", "04-11-2025 12:00", "Random Random Random Random")
+    var diaryEntries by remember {
+        mutableStateOf(
+            listOf(
+                DiaryEntry(1, "Kremenie", "03-11-2025 21:30", "Random Random"),
+                DiaryEntry(2, "Liecenie", "04-11-2025 08:15", "Random Random Random"),
+                DiaryEntry(3, "Prehliadka", "04-11-2025 12:00", "Vceli prehliadka jarna")
+            )
         )
-    ) }
+    }
 
+    var searchQuery by remember { mutableStateOf("") }
+    var isSearchActive by remember { mutableStateOf(false) }
     var showDialog by remember { mutableStateOf(false) }
     var editingEntry by remember { mutableStateOf<DiaryEntry?>(null) }
+
+    val filteredEntries = diaryEntries.filter { entry ->
+        val query = searchQuery.lowercase()
+        entry.type.lowercase().contains(query)
+                || entry.timestamp.lowercase().contains(query)
+                || entry.note.lowercase().contains(query)
+    }
 
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text("Denník", fontSize = 20.sp) }
+                title = {
+                    Text("Dennik", fontSize = 26.sp)
+                },
+                actions = {
+                    SearchBar(
+                        inputField = {
+                            TextField(
+                                value = searchQuery,
+                                onValueChange = { searchQuery = it },
+                                placeholder = { Text("Hladat...") },
+                                singleLine = true
+                            )
+                        },
+                        expanded = isSearchActive,
+                        onExpandedChange = { isSearchActive = it },
+                        modifier = Modifier.padding(end = 8.dp),
+                    ) {
+                    }
+                }
             )
         },
         floatingActionButton = {
@@ -51,9 +83,9 @@ fun DiaryScreen() {
                     showDialog = true
                 }
             ) {
-                androidx.compose.material3.Icon(
+                Icon(
                     imageVector = Icons.Default.Add,
-                    contentDescription = "Pridať záznam"
+                    contentDescription = "Pridat zaznam"
                 )
             }
         }
@@ -65,7 +97,7 @@ fun DiaryScreen() {
                 .fillMaxSize()
                 .padding(16.dp)
         ) {
-            items(diaryEntries) { entry ->
+            items(filteredEntries) { entry ->
                 DiaryEntryCard(
                     entry = entry,
                     onClick = { selectedEntry ->
@@ -94,7 +126,6 @@ fun DiaryScreen() {
                 }
                 showDialog = false
             }
-
         )
     }
 }

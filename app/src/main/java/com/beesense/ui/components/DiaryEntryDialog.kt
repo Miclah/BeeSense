@@ -113,15 +113,19 @@ fun DiaryEntryDialog(
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(vertical = 8.dp),
-                horizontalArrangement = Arrangement.Center
+                    .padding(horizontal = 8.dp, vertical = 8.dp),
+                horizontalArrangement = Arrangement.SpaceEvenly
             ) {
                 if (initialEntry != null) {
                     Button(onClick = { onDelete?.invoke(initialEntry) }) {
                         Text("Vymazať")
                     }
-                    Spacer(modifier = Modifier.width(8.dp))
+                } else {
+                    Button(onClick = onDismiss) {
+                        Text("Zrušiť")
+                    }
                 }
+
                 Button(onClick = {
                     if (hasChanged) {
                         val entry = initialEntry?.copy(

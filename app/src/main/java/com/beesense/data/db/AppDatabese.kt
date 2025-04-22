@@ -4,6 +4,8 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import com.beesense.data.db.dao.SettingsDao
+import com.beesense.data.db.entities.SettingsEntity
 
 @Database(entities = [SettingsEntity::class], version = 1)
 abstract class AppDatabase : RoomDatabase() {
