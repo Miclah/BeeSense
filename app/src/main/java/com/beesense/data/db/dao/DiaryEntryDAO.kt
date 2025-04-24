@@ -1,4 +1,4 @@
-package com.beesense.data.db
+package com.beesense.data.db.dao
 import androidx.room.*
 import com.beesense.data.db.entities.DiaryEntryEntity
 import kotlinx.coroutines.flow.Flow

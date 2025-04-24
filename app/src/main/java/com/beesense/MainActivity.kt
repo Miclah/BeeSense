@@ -24,6 +24,10 @@ import com.beesense.ui.screens.subscreens.SettingsScreen
 import com.beesense.ui.theme.BeeSenseTheme
 
 class MainActivity : ComponentActivity() {
+
+
+    // TODO: Scroll list v menu a settings
+    // TODO: zachovavanie hodnot po tom co dam landscape rezim
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
