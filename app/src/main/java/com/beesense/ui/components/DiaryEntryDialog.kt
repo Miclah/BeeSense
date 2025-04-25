@@ -146,6 +146,7 @@ fun DiaryEntryDialog(
     )
 }
 
+
 private fun getCurrentTime(): String {
     val calendar = Calendar.getInstance()
     return String.format(

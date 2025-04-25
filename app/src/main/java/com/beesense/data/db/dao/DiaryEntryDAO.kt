@@ -5,7 +5,7 @@ import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface DiaryEntryDao {
-    @Query("SELECT * FROM diary_entries ORDER BY time DESC")
+    @Query("SELECT * FROM diary_entries ORDER BY timestamp DESC")
     fun getAllDiaryEntries(): Flow<List<DiaryEntryEntity>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
