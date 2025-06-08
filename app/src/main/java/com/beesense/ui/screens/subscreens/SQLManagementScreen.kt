@@ -8,6 +8,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.sp
 
+// Placeholder pre obrazovku na spravu SQL dat
 @Composable
 fun SQLManagementScreen() {
     Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
