@@ -1,5 +1,7 @@
 package com.beesense.ui.components
 
+// Pomoc s AI
+
 /**
  * Komponenta pre vyber datumu.
  *

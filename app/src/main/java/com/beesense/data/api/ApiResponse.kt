@@ -4,7 +4,6 @@ import com.beesense.data.model.HiveData
 import com.google.gson.JsonDeserializationContext
 import com.google.gson.JsonDeserializer
 import com.google.gson.JsonElement
-import com.google.gson.annotations.SerializedName
 import org.json.JSONObject
 import java.lang.reflect.Type
 import java.text.SimpleDateFormat
